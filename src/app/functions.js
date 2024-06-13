@@ -27,11 +27,19 @@ function debounce(func, delay) {
 }
 
 async function fetchData(url) {
+  let isLoading = false
   try {
-    const response = await fetch(url);
+    isLoading = true
+    console.log("A")
+    fetchData()
+    console.log("B")
+    const response = await fetch(url)
     const data = await response.json();
-    return { data, error: null };
+    isLoading = false
+    return { data, error: null, isLoading };
   } catch (error) {
+    // console.error(error);
     return { data: null, error };
   }
 }
+
